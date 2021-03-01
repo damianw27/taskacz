@@ -1,0 +1,85 @@
+.mainTaskView {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.tasksList {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.taskItem {
+  padding-left: 10px;
+  margin: 3px 2px;
+  color: black;
+  background-color: rgb(236, 236, 236);
+  border: solid 1px rgb(49, 49, 49);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskItemLabel {
+  flex: 10;
+  padding-right: 5px;
+  display: inline-block;
+}
+
+.taskItemDoneButton {
+  flex: 2;
+  background-color: rgb(61, 61, 61);
+  color: white;
+  padding: 15px;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+
+.taskItemDoneButton:hover {
+  background-color: rgb(92, 92, 92);
+  color: white;
+  transition: 0.5s;
+}
+
+.taskInput {
+  display: flex;
+}
+
+.taskInputText {
+  flex: 8;
+  padding: 12px 20px;
+  margin: 3px 0px 3px 2px;
+  border: 1px solid rgb(49, 49, 49);
+  border-right: none;
+  box-sizing: border-box;
+  outline: none;
+  display: inline-block;
+}
+
+.taskInputText:focus {
+  background-color: rgb(148, 148, 148);
+  transition: 0.5s;
+}
+
+.taskInputButton {
+  flex: 1;
+  background-color: rgb(7, 85, 0);
+  color: rgb(255, 255, 255);
+  padding: 12px 20px;
+  margin: 3px 2px 3px 0px;
+  border: 1px solid rgb(49, 49, 49);
+  border-left: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: inline-block;
+  outline: none;
+}
+
+.taskInputButton:hover {
+  background-color: rgb(79, 175, 71);
+  color: rgb(36, 36, 36);
+  transition: 0.5s;
+}

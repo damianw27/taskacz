@@ -3,8 +3,8 @@ const path = require("path");
 module.exports = {
   target: "electron-renderer",
   entry: {
-    core: "./src/core.ts",
-    view: "./src/ui/view.tsx",
+    core: "./src/Core.ts",
+    view: "./src/ui/View.tsx",
   },
   module: {
     rules: [
@@ -14,7 +14,7 @@ module.exports = {
         use: ["babel-loader", "eslint-loader"],
       },
       {
-        test: /\.module\.css$/,
+        test: /\.css$/,
         exclude: /node_modules/,
         use: [
           "style-loader",

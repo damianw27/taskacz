@@ -1,5 +1,5 @@
-import TodoManager from "./taskManager";
-import PublicService from "./publicService";
+import TodoManager from "./TaskManager";
+import PublicService from "./PublicService";
 import { ipcMain, app, BrowserWindow } from "electron";
 
 function registerServices() {
@@ -22,6 +22,7 @@ function createWindow() {
   });
 
   win.setResizable(false);
+  win.removeMenu();
 
   win.loadFile("index.html");
 }

@@ -1,17 +1,18 @@
 html {
   padding: 0;
   margin: 0;
+  user-select: none;
 }
 
 body {
-  background: linear-gradient(
-      0deg,
-      rgba(27, 27, 27, 1) 0%,
-      rgba(38, 38, 38, 1) 50%,
-      rgba(64, 64, 64, 1) 100%
-    )
-    no-repeat;
-  padding: 5px;
+  padding: 0;
   margin: 0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: gray;
+}
+
+#root {
   height: 100%;
 }

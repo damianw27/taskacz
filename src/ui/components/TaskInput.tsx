@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import taskStyles from '../styles/tasks';
+import css from '../styles/TaskModule.css';
 
 interface TaskInputProps {
   onTaskAdd(taskLabel: string): void,
@@ -8,17 +8,24 @@ interface TaskInputProps {
 function TaskInput({ onTaskAdd }: TaskInputProps): ReactElement {
   const [taskLabel, setTaskLabel] = useState<string>("");
 
+  function handleTaskAdd() {
+    onTaskAdd(taskLabel);
+    setTaskLabel("");
+  }
+
   return (
-    <div>
+    <div className={css.taskInput}>
       <input
-        style={taskStyles.taskInputText}
+        className={css.taskInputText}
         onChange={(event) => setTaskLabel(event.target.value)}
+        value={taskLabel}
         type="text"
       />
       <button
-        style={taskStyles.taskInputButton}
-        onClick={() => onTaskAdd(taskLabel)}
+        className={css.taskInputButton}
+        onClick={handleTaskAdd}
         type="button"
+        disabled={taskLabel === ""}
       >
         Add
       </button>

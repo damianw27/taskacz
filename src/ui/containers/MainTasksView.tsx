@@ -1,9 +1,10 @@
-import AppActions from '../../types/appActions';
-import Task from '../../types/task';
+import AppActions from '../../types/AppActions';
+import Task from '../../types/Task';
 import { ipcRenderer } from 'electron';
 import React, { ReactElement, useEffect, useState } from 'react';
-import TaskList from '../components/taskList';
-import TaskInput from '../components/taskInput';
+import TaskList from '../components/TaskList';
+import TaskInput from '../components/TaskInput';
+import css from '../styles/TaskModule.css';
 
 function MainTaskView(): ReactElement {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -44,19 +45,32 @@ function MainTaskView(): ReactElement {
     setTasks(tmpTasks);
   }
 
-  function onTaskDone(task: Task): void {
+  function onTaskDoneChange(taskId: number, isDone: boolean): void {
+    const tmpTasks = [...tasks].map((currentTask: Task) => ({
+      ...currentTask,
+      isDone: currentTask.id === taskId ? isDone : currentTask.isDone,
+    }));
+
+    setTasks(tmpTasks);
+  }
+
+  function onTaskDelete(taskId: number) {
     const tmpTasks = [...tasks]
-      .filter((currentTask: Task) => currentTask.id !== task.id)
-      .map((currentTask: Task, index: number) => ({ ...currentTask, id: index } as Task));
+      .filter((task) => task.id !== taskId)
+      .map((currentTask: Task, index: number) => ({ ...currentTask, id: index }));
 
     setTasks(tmpTasks);
   }
 
   return (
-    <>
-      <TaskList tasks={tasks || []} onTaskDone={onTaskDone} />
+    <div className={css.mainTaskView}>
       <TaskInput onTaskAdd={onTaskAdd} />
-    </>
+      <TaskList
+        tasks={tasks || []}
+        onTaskDoneChange={onTaskDoneChange}
+        onTaskDelete={onTaskDelete}
+      />
+    </div>
   );
 }
 
