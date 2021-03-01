@@ -1,0 +1,17 @@
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(
+      0deg,
+      rgba(27, 27, 27, 1) 0%,
+      rgba(38, 38, 38, 1) 50%,
+      rgba(64, 64, 64, 1) 100%
+    )
+    no-repeat;
+  padding: 5px;
+  margin: 0;
+  height: 100%;
+}

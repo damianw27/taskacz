@@ -17,6 +17,7 @@
     "@typescript-eslint/parser": "^4.15.2",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.1.0",
+    "copyfiles": "^2.4.1",
     "electron": "^11.3.0",
     "electron-packager": "^15.2.0",
     "eslint": "^7.21.0",
@@ -28,8 +29,9 @@
     "webpack-cli": "^4.5.0"
   },
   "scripts": {
-    "build:dev": "webpack --config=webpack.config.js --mode=development && electron ./dist/core.js",
-    "build:prod": "webpack --config=webpack.config.js --mode=production && electron ./dist/core.js"
+    "prepare": "copyfiles -f assets/*.* dist",
+    "build:dev": "yarn prepare && webpack --config=webpack.config.js --mode=development && electron ./dist/core.js",
+    "build:prod": "yarn prepare && webpack --config=webpack.config.js --mode=production && electron ./dist/core.js"
   },
   "keywords": [],
   "author": "",
