@@ -30,7 +30,7 @@ function TaskItem({ task, onTaskDoneChange, onTaskDelete }: TaskItemProps): Reac
           : <RadioButtonUncheckedIcon onClick={() => onTaskDoneChange(task.id, true)} />
       }
       <span className={css.taskItemLabel} style={textStyle}>{task.label}</span>
-      <IconButton onClick={() => onTaskDelete(task.id)}>
+      <IconButton onClick={() => onTaskDelete(task.id)} style={{ color: 'rgb(150, 50, 50)' }}>
         <DeleteIcon fontSize="small" />
       </IconButton>
     </div>
