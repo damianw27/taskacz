@@ -2,6 +2,10 @@ import React, { ReactElement } from "react";
 import Task from "../../types/Task"
 import css from '../styles/TaskModule.css';
 import { CSSProperties } from 'react';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 interface TaskItemProps {
   task: Task;
@@ -11,7 +15,7 @@ interface TaskItemProps {
 
 function TaskItem({ task, onTaskDoneChange, onTaskDelete }: TaskItemProps): ReactElement {
   const containerStyle: CSSProperties = {
-    backgroundColor: task.isDone ? "rgba(100, 255, 100, 0.2)" : "white",
+    color: task.isDone ? "rgb(100, 100, 100)" : "rgb(50, 50, 50)"
   };
 
   const textStyle: CSSProperties = {
@@ -20,22 +24,15 @@ function TaskItem({ task, onTaskDoneChange, onTaskDelete }: TaskItemProps): Reac
 
   return (
     <div className={css.taskItem} style={containerStyle}>
+      {
+        task.isDone
+          ? <CheckCircleOutlineIcon onClick={() => onTaskDoneChange(task.id, false)} />
+          : <RadioButtonUncheckedIcon onClick={() => onTaskDoneChange(task.id, true)} />
+      }
       <span className={css.taskItemLabel} style={textStyle}>{task.label}</span>
-      <button
-        type="button"
-        onClick={() => onTaskDoneChange(task.id, !task.isDone)}
-        className={css.taskItemDoneButton}
-        disabled={task.isDone}
-      >
-        Done
-      </button>
-      <button
-        type="button"
-        onClick={() => onTaskDelete(task.id)}
-        className={css.taskItemDoneButton}
-      >
-        Delete
-      </button>
+      <IconButton onClick={() => onTaskDelete(task.id)}>
+        <DeleteIcon fontSize="small" />
+      </IconButton>
     </div>
   );
 }

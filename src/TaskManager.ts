@@ -6,7 +6,7 @@ import AppActions from "./types/AppActions";
 const TasksFilePath = "./data/tasks.json";
 const DataFolder = "./data";
 
-export default class TodoManager implements PublicService {
+export default class TaskManager implements PublicService {
   loadTasksItems(): Task[] {
     try {
       return this.readTasksDataFromFile();

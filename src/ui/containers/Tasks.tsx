@@ -5,8 +5,9 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import TaskList from '../components/TaskList';
 import TaskInput from '../components/TaskInput';
 import css from '../styles/TaskModule.css';
+import useDebouncedEffect from '../hooks/DebouncedEffect';
 
-function MainTaskView(): ReactElement {
+function Tasks(): ReactElement {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   function onComponentMount() {
@@ -26,30 +27,41 @@ function MainTaskView(): ReactElement {
     return onComponentUmount();
   }, []);
 
-  useEffect(() => {
+  function onDebouncedTasksUpdate() {
     ipcRenderer
       .invoke(AppActions.SaveTasks, tasks);
-  }, [JSON.stringify(tasks)])
+  }
+
+  useDebouncedEffect(onDebouncedTasksUpdate, [JSON.stringify(tasks)], 200);
+
+  function sortTasksByDoneFlag(first: Task, second: Task) {
+    return  first.isDone !== second.isDone
+      ? Number(second.isDone) - Number(first.isDone)
+      : 0;
+  }
 
   function onTaskAdd(taskLabel: string): void {
-    const tmpTasks = [...tasks];
-
     const task: Task = {
-      id: tmpTasks.length || 0,
+      id: tasks.length || 0,
       label: taskLabel,
       isDone: false,
     }
 
-    tmpTasks.push(task);
+    const tmpTasks = [...tasks, task]
+      .sort(sortTasksByDoneFlag)
+      .reverse();
 
     setTasks(tmpTasks);
   }
 
   function onTaskDoneChange(taskId: number, isDone: boolean): void {
-    const tmpTasks = [...tasks].map((currentTask: Task) => ({
-      ...currentTask,
-      isDone: currentTask.id === taskId ? isDone : currentTask.isDone,
-    }));
+    const tmpTasks = [...tasks]
+      .map((currentTask: Task) => ({
+        ...currentTask,
+        isDone: currentTask.id === taskId ? isDone : currentTask.isDone,
+      }))
+      .sort(sortTasksByDoneFlag)
+      .reverse();
 
     setTasks(tmpTasks);
   }
@@ -74,4 +86,4 @@ function MainTaskView(): ReactElement {
   );
 }
 
-export default MainTaskView;
+export default Tasks;

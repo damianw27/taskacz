@@ -1,9 +1,9 @@
-import TodoManager from "./TaskManager";
+import TaskManager from "./TaskManager";
 import PublicService from "./PublicService";
 import { ipcMain, app, BrowserWindow } from "electron";
 
 function registerServices() {
-  const services: PublicService[] = [new TodoManager()];
+  const services: PublicService[] = [new TaskManager()];
 
   return services.forEach((service: PublicService) =>
     service.register(ipcMain)
@@ -14,8 +14,8 @@ function createWindow() {
   registerServices();
 
   const win = new BrowserWindow({
-    width: 400,
-    height: 600,
+    width: 500,
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
     },

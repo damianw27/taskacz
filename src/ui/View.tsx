@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MainTaskView from './containers/MainTasksView';
+import Tasks from './containers/Tasks';
 
 ReactDOM.render(
-  <MainTaskView />,
+  <Tasks />,
   document.getElementById('root'));
