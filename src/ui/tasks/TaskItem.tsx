@@ -2,6 +2,7 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import React, {
   CSSProperties,
+  FocusEvent,
   KeyboardEvent,
   ReactElement,
   useState,
@@ -44,7 +45,7 @@ function TaskItem({
     );
   }
 
-  function handleTaskLabelChange(event: KeyboardEvent<HTMLInputElement>) {
+  function handleTaskLabelChange(event: KeyboardEvent<HTMLInputElement>): void {
     if (event.key !== "Enter") {
       return;
     }
@@ -53,14 +54,23 @@ function TaskItem({
     setIsEditMode(false);
   }
 
+  function handleFocus(event: FocusEvent<HTMLInputElement>): void {
+    task.label = event.currentTarget.value;
+    setIsEditMode(false);
+  }
+
   function renderTaskDescriptor(): ReactElement {
     return isEditMode ? (
-      <TextBox defaultValue={task.label} onKeyDown={handleTaskLabelChange} />
+      <TextBox
+        defaultValue={task.label}
+        onKeyDown={handleTaskLabelChange}
+        onBlur={handleFocus}
+        autoFocus
+      />
     ) : (
       <span
         className={css.taskItemLabel}
         style={textStyle}
-        onClick={() => onTaskDoneChange(task.id, !task.isDone)}
         onDoubleClick={() => setIsEditMode(true)}
       >
         {task.label}
@@ -70,9 +80,13 @@ function TaskItem({
 
   return (
     <li className={css.taskItem} style={containerStyle}>
-      <div className={css.taskItemCheckIndicatorContainer}>{renderCheckIndicator()}</div>
+      <div className={css.taskItemCheckIndicatorContainer}>
+        {renderCheckIndicator()}
+      </div>
       <div className={css.taskItemLabelContainer}>{renderTaskDescriptor()}</div>
-      <Button onClick={() => onTaskDelete(task.id)} isDanger>Delete</Button>
+      <Button onClick={() => onTaskDelete(task.id)} isDanger>
+        Delete
+      </Button>
     </li>
   );
 }

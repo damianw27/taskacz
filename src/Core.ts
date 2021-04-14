@@ -21,9 +21,9 @@ function createWindow() {
     },
   });
 
-  // win.setResizable(false);
+  win.setResizable(false);
   win.removeMenu();
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   win.loadFile("index.html");
 }
