@@ -6,7 +6,7 @@ function registerServices() {
   const services: PublicService[] = [new TaskManager()];
 
   return services.forEach((service: PublicService) =>
-    service.register(ipcMain)
+    service.register(ipcMain),
   );
 }
 
@@ -21,8 +21,9 @@ function createWindow() {
     },
   });
 
-  win.setResizable(false);
+  // win.setResizable(false);
   win.removeMenu();
+  win.webContents.openDevTools();
 
   win.loadFile("index.html");
 }

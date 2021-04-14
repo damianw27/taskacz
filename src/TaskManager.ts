@@ -23,7 +23,10 @@ export default class TaskManager implements PublicService {
     }
 
     const readFlag = fs.existsSync(TasksFilePath) ? "r" : "wx";
-    const dataFromFile = fs.readFileSync(TasksFilePath, { encoding: "utf-8", flag: readFlag })
+    const dataFromFile = fs.readFileSync(TasksFilePath, {
+      encoding: "utf-8",
+      flag: readFlag,
+    });
     return JSON.parse(dataFromFile) || [];
   }
 
@@ -39,7 +42,7 @@ export default class TaskManager implements PublicService {
     ipcMain.handle(AppActions.LoadTasks, () => this.loadTasksItems());
 
     ipcMain.handle(AppActions.SaveTasks, (_, args: Task[]) =>
-      this.saveTasksItems(args)
+      this.saveTasksItems(args),
     );
   }
 }

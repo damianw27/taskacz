@@ -1,0 +1,25 @@
+.tabButton {
+  background-color: #a2a2a2;
+  color: #ffffff;
+  border: 2px solid #898989;
+  border-radius: 4px;
+  outline: none;
+  padding: 5px 10px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.tabButton:hover {
+  background-color: #595959;
+}
+
+.tabButton:disabled {
+  pointer-events: none;
+  background-color: #898989;
+}
+
+.selectedTabButton {
+  pointer-events: none;
+  background-color: #CECECE;
+  color: #363636;
+}

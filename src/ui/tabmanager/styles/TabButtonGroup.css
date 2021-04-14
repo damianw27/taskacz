@@ -1,0 +1,16 @@
+.tabButtonGroup {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #2f2f2f;
+  border-right: 2px solid #898989;
+}
+
+.tabButtonGroup > * {
+  margin-bottom: 3px;
+}
+
+.tabButtonGroup > *:last-child {
+  margin-bottom: 0;
+}
+

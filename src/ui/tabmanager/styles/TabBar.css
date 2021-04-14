@@ -1,0 +1,15 @@
+.tabs {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  margin: 0;
+}
+
+.tabContent {
+  position: relative;
+  display: flex;
+  background: #eeeeee;
+  padding: 5px;
+  flex: 1;
+}

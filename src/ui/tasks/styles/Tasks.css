@@ -1,0 +1,77 @@
+.mainTaskView {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tasksList {
+  width: 100%;
+  overflow-y: scroll;
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+  flex: 1;
+}
+
+.taskItem {
+  padding: 5px;
+  margin: 3px 2px;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskItemCheckIndicatorContainer {
+  display: flex;
+  margin-right: 5px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.taskItemLabelContainer {
+  flex: 1;
+}
+
+.taskItemLabel {
+  flex: 10;
+  padding-right: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.taskItemButton {
+  flex: 1;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+
+.taskItemButton:hover {
+  background-color: rgb(196, 196, 196);
+  transition: 0.5s;
+}
+
+.taskItemButton:disabled {
+  color: rgb(235, 235, 235);
+  cursor: default;
+}
+
+.taskInput {
+  display: flex;
+  width: 100%;
+}
+
+.taskInput > * {
+  margin-right: 5px;
+}
+
+.taskInput > *:last-child {
+  margin-right: 0;
+}

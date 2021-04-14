@@ -1,0 +1,35 @@
+.dwButton {
+  background-color: #00a2ff;
+  color: #ffffff;
+  border: 2px solid #0089ff;
+  border-radius: 4px;
+  outline: none;
+  padding: 10px 15px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.dwButton:hover {
+  background-color: #2daffa;
+}
+
+.dwButton:disabled {
+  pointer-events: none;
+  cursor: default;
+  background-color: #0089ff;
+}
+
+.dwButton.danger {
+  background-color: #ff7200;
+  border: 2px solid #ff4900;
+}
+
+.dwButton.danger:hover {
+  background-color: #fe5f2d;
+}
+
+.dwButton.danger:disabled {
+  pointer-events: none;
+  cursor: default;
+  background-color: #ff4900;
+}
