@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
     "outDir": "./dist/",
     "noImplicitAny": true,
     "moduleResolution": "node",
@@ -11,11 +10,11 @@
     "allowJs": true,
     "strict": true,
     "esModuleInterop": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@core/*": ["./*"],
-      "@ui/*": ["../ui/*"],
-      "@type/*": ["./types/*"]
+      "@/*": ["src/*"],
+      "@ui/*": ["src/ui/*"],
+      "@type/*": ["src/types/*"]
     }
   }
 }

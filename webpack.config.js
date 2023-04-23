@@ -1,18 +1,88 @@
 const path = require("path");
+const ESLintPlugin = require('eslint-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
-module.exports = {
-  target: "electron-renderer",
-  entry: {
-    core: "./src/Core.ts",
-    view: "./src/ui/View.tsx",
-  },
+const baseConfig = {
   module: {
     rules: [
       {
         test: /\.tsx?/,
         exclude: /node_modules/,
-        use: ["babel-loader", "eslint-loader"],
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: 'tsconfig.json'
+            }
+          }
+        ],
       },
+    ],
+  },
+  resolve: {
+    plugins: [
+      new TsconfigPathsPlugin(),
+    ],
+  },
+  plugins: [
+    new ESLintPlugin(),
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          parse: {
+            ecma: 8,
+          },
+          compress: {
+            ecma: 5,
+            warnings: false,
+            comparisons: false,
+          },
+          mangle: {
+            safari10: true,
+          },
+          output: {
+            ecma: 5,
+            comments: false,
+            ascii_only: true,
+          },
+        },
+        parallel: true,
+      }),
+    ],
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+  },
+};
+
+const mainConfig = {
+  ...baseConfig,
+  target: 'electron-main',
+  entry: './src/core.ts',
+  resolve: {
+    ...baseConfig.resolve,
+    extensions: [".ts"],
+  },
+  output: {
+    ...baseConfig.output,
+    filename: "main.js",
+  },
+}
+
+const rendererConfig = {
+  ...baseConfig,
+  target: 'electron-renderer',
+  entry: './src/ui/view.tsx',
+  module: {
+    ...baseConfig.module,
+    rules: [
+      ...baseConfig.module.rules,
       {
         test: /\.css$/,
         exclude: /node_modules/,
@@ -21,7 +91,6 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              modules: true,
               importLoaders: 1,
               modules: {
                 localIdentName: "[name]_[local]_[hash:base64]",
@@ -31,13 +100,43 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+        },
+      },
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    ...baseConfig.resolve,
+    extensions: [".tsx", ".ts"],
   },
+  plugins: [
+    ...baseConfig.plugins,
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      minify: true,
+      template: './assets/index.html',
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'styles.css',
+          to: 'styles.css',
+          context: 'assets/'
+        }
+      ],
+    })
+  ],
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "dist"),
+    ...baseConfig.output,
+    filename: "renderer.js",
   },
-};
+}
+
+module.exports = [
+  mainConfig,
+  rendererConfig,
+];

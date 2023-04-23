@@ -1,2 +1,5 @@
 node_modules
 dist
+.eslintrc.js
+.prettierrc.js
+webpack.config.js
