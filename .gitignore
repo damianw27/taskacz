@@ -47,3 +47,7 @@ ios
 
 # TypeScript
 *.tsbuildinfo
+
+# Taskacz Files
+tasks.json
+settings.json
