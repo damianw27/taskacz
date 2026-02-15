@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
+  "applicationId": "pl.wilenskid.taskacz",
+  "version": "1.0.0",
+  "defaultMode": "window",
+  "documentRoot": "/dist/desktop/",
+  "url": "/",
+  "port": 0,
+  "tokenSecurity": "none",
+  "enableServer": true,
+  "enableNativeAPI": true,
+  "logging": {
+    "enabled": true,
+    "writeToLogFile": true
+  },
+  "nativeAllowList": ["app.*", "os.*", "filesystem.*"],
+  "modes": {
+    "window": {
+      "title": "Taskacz",
+      "width": 500,
+      "height": 800,
+      "icon": "/resource/logo.svg",
+      "enableInspector": true,
+      "resizable": false,
+      "exitProcessOnClose": true,
+      "fullScreen": false,
+      "maximize": false
+    }
+  },
+  "cli": {
+    "binaryName": "taskacz",
+    "resourcesPath": "/dist/desktop/",
+    "frontendLibrary": {
+      "projectPath": "./src/platforms/desktop/",
+      "patchFile": "./src/platforms/desktop/index.html",
+      "devUrl": "http://localhost:5173",
+      "initCommand": "bun install",
+      "devCommand": "bun dev:desktop",
+      "buildCommand": "bun build:desktop"
+    },
+    "vite": {
+      "projectPath": "/"
+    }
+  }
+}

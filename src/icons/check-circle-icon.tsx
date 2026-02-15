@@ -1,0 +1,23 @@
+import type { FC } from 'react';
+import { iconClassName } from '@/icons/styles/icon-style';
+import type { SharedIconProps } from '@/types/shared-icon-props';
+
+export const CheckCircleIcon: FC<SharedIconProps> = ({
+  altText = '',
+  width = '20px',
+  height = '20px',
+  onClick = () => {},
+}) => (
+  <svg
+    width={width}
+    height={height}
+    fill="currentColor"
+    className={iconClassName}
+    viewBox="0 0 16 16"
+    onClick={onClick}
+    onKeyUp={onClick}
+  >
+    <title>{altText}</title>
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+  </svg>
+);
