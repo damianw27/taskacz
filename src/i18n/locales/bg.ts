@@ -11,6 +11,7 @@ export const bg: Namespace = {
   },
   navigation: {
     tasks: 'Задачи',
+    projects: 'Projects',
     settings: 'Настройки',
   },
   settings: {
@@ -90,6 +91,15 @@ export const bg: Namespace = {
     title: 'Моите задачи',
     addNewTask: 'Добавяне на нова задача',
     searchPlaceholder: 'Търси...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'Стъпка {{current}} от {{total}}',

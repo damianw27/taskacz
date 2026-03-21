@@ -11,6 +11,7 @@ export const lv: Namespace = {
   },
   navigation: {
     tasks: 'Uzdevumi',
+    projects: 'Projects',
     settings: 'Iestatījumi',
   },
   settings: {
@@ -90,6 +91,15 @@ export const lv: Namespace = {
     title: 'Mani uzdevumi',
     addNewTask: 'Pievienot jaunu uzdevumu',
     searchPlaceholder: 'Meklēt...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: '{{current}}. solis no {{total}}',

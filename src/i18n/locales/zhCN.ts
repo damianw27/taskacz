@@ -11,6 +11,7 @@ export const zhCN: Namespace = {
   },
   navigation: {
     tasks: '任务',
+    projects: 'Projects',
     settings: '设置',
   },
   settings: {
@@ -87,6 +88,15 @@ export const zhCN: Namespace = {
     title: '我的任务',
     addNewTask: '添加新任务',
     searchPlaceholder: '搜索...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: '第 {{current}} 步，共 {{total}} 步',

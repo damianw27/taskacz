@@ -11,6 +11,7 @@ export const hi: Namespace = {
   },
   navigation: {
     tasks: 'कार्य',
+    projects: 'Projects',
     settings: 'सेटिंग्स',
   },
   settings: {
@@ -87,6 +88,15 @@ export const hi: Namespace = {
     title: 'मेरे कार्य',
     addNewTask: 'नया कार्य जोड़ें',
     searchPlaceholder: 'खोजें...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'चरण {{current}} / {{total}}',

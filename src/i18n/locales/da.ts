@@ -11,6 +11,7 @@ export const da: Namespace = {
   },
   navigation: {
     tasks: 'Opgaver',
+    projects: 'Projects',
     settings: 'Indstillinger',
   },
   settings: {
@@ -87,6 +88,15 @@ export const da: Namespace = {
     title: 'Mine opgaver',
     addNewTask: 'Tilføj ny opgave',
     searchPlaceholder: 'Søg...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'Trin {{current}} af {{total}}',

@@ -11,6 +11,7 @@ export const ja: Namespace = {
   },
   navigation: {
     tasks: 'タスク',
+    projects: 'Projects',
     settings: '設定',
   },
   settings: {
@@ -87,6 +88,15 @@ export const ja: Namespace = {
     title: '私のタスク',
     addNewTask: '新しいタスクを追加',
     searchPlaceholder: '検索...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: '{{total}}ステップ中{{current}}ステップ目',

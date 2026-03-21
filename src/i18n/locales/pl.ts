@@ -11,6 +11,7 @@ export const pl: Namespace = {
   },
   navigation: {
     tasks: 'Zadania',
+    projects: 'Projects',
     settings: 'Ustawienia',
   },
   settings: {
@@ -89,6 +90,15 @@ export const pl: Namespace = {
     title: 'Moje zadania',
     addNewTask: 'Dodaj nowe zadanie',
     searchPlaceholder: 'Szukaj...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'Krok {{current}} z {{total}}',

@@ -11,6 +11,7 @@ export const ko: Namespace = {
   },
   navigation: {
     tasks: '할 일',
+    projects: 'Projects',
     settings: '설정',
   },
   settings: {
@@ -87,6 +88,15 @@ export const ko: Namespace = {
     title: '내 할 일',
     addNewTask: '새 할 일 추가',
     searchPlaceholder: '검색...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: '{{total}}단계 중 {{current}}단계',

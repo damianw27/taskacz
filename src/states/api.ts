@@ -10,6 +10,10 @@ const defaultApi: ApiValue = {
     loadTasks: async () => missingApiError(),
     saveTasks: async () => missingApiError(),
   },
+  projectService: {
+    loadProjects: async () => missingApiError(),
+    saveProjects: async () => missingApiError(),
+  },
   appSettingsService: {
     getSettings: async () => missingApiError(),
     setSettings: async () => missingApiError(),

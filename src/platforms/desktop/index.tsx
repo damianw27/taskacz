@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { App } from '@/app';
 import { initI18n } from '@/i18n/setup-i18n';
 import { neutralinoAppSettingsService } from '@/platforms/desktop/services/app-settings-service';
+import { neutralinoProjectService } from '@/platforms/desktop/services/project-service';
 import { neutralinoTaskService } from '@/platforms/desktop/services/task-service';
 import { setApi } from '@/states/api';
 
@@ -11,6 +12,7 @@ Neu.init();
 
 setApi({
   taskService: neutralinoTaskService,
+  projectService: neutralinoProjectService,
   appSettingsService: neutralinoAppSettingsService,
 });
 

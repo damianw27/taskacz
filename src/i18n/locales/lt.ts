@@ -11,6 +11,7 @@ export const lt: Namespace = {
   },
   navigation: {
     tasks: 'Užduotys',
+    projects: 'Projects',
     settings: 'Nustatymai',
   },
   settings: {
@@ -91,6 +92,15 @@ export const lt: Namespace = {
     title: 'Mano užduotys',
     addNewTask: 'Pridėti naują užduotį',
     searchPlaceholder: 'Ieškoti...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: '{{current}} žingsnis iš {{total}}',

@@ -11,6 +11,7 @@ export const sr: Namespace = {
   },
   navigation: {
     tasks: 'Задаци',
+    projects: 'Projects',
     settings: 'Подешавања',
   },
   settings: {
@@ -89,6 +90,15 @@ export const sr: Namespace = {
     title: 'Моји задаци',
     addNewTask: 'Додај нови задатак',
     searchPlaceholder: 'Претрага...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'Корак {{current}} од {{total}}',

@@ -11,6 +11,7 @@ export const sv: Namespace = {
   },
   navigation: {
     tasks: 'Uppgifter',
+    projects: 'Projects',
     settings: 'Inställningar',
   },
   settings: {
@@ -87,6 +88,15 @@ export const sv: Namespace = {
     title: 'Mina uppgifter',
     addNewTask: 'Lägg till ny uppgift',
     searchPlaceholder: 'Sök...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'Steg {{current}} av {{total}}',

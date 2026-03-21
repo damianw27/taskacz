@@ -69,6 +69,8 @@ Run packaged desktop app locally:
 bun start
 ```
 
+Note: Neutralino startup scripts set `WEBKIT_DISABLE_DMABUF_RENDERER=1` only when a Wayland session is detected (`XDG_SESSION_TYPE=wayland`, `WAYLAND_DISPLAY`, or `GDK_BACKEND=wayland`).
+
 Build distributable package:
 
 ```bash

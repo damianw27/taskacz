@@ -1,7 +1,16 @@
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: Tooltip now is using mouse enter and leave events */
 // TODO: remove interactivity from the tooltip div
 import { css } from '@emotion/css';
-import { type FC, type ReactNode, useCallback, useMemo, useRef, useState } from 'react';
+import {
+  type FC,
+  type ReactNode,
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { createPortal } from 'react-dom';
 import { useTheme } from '@/modules/theme/hooks/use-theme';
 
 type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
@@ -142,8 +151,8 @@ export const Tooltip: FC<Props> = ({ text, children, position = 'top' }) => {
     [colors],
   );
 
-  const calculatePosition = useCallback(() => {
-    if (!wrapperRef.current || !tooltipRef.current) return;
+  useLayoutEffect(() => {
+    if (!isVisible || !wrapperRef.current || !tooltipRef.current) return;
 
     const rect = wrapperRef.current.getBoundingClientRect();
     const tooltipRect = tooltipRef.current.getBoundingClientRect();
@@ -171,12 +180,11 @@ export const Tooltip: FC<Props> = ({ text, children, position = 'top' }) => {
     }
 
     setCoords({ top, left });
-  }, [position]);
+  }, [isVisible, position]);
 
   const handleMouseEnter = useCallback(() => {
     setIsVisible(true);
-    requestAnimationFrame(calculatePosition);
-  }, [calculatePosition]);
+  }, []);
 
   const handleMouseLeave = useCallback(() => {
     setIsVisible(false);
@@ -190,13 +198,16 @@ export const Tooltip: FC<Props> = ({ text, children, position = 'top' }) => {
       onMouseLeave={handleMouseLeave}
     >
       {children}
-      <span
-        ref={tooltipRef}
-        className={`${tooltipBaseClassName} ${arrowStyles[position]} ${isVisible ? visibleClassName : ''}`}
-        style={{ top: coords.top, left: coords.left }}
-      >
-        {text}
-      </span>
+      {createPortal(
+        <span
+          ref={tooltipRef}
+          className={`${tooltipBaseClassName} ${arrowStyles[position]} ${isVisible ? visibleClassName : ''}`}
+          style={{ top: coords.top, left: coords.left }}
+        >
+          {text}
+        </span>,
+        document.body,
+      )}
     </div>
   );
 };

@@ -13,7 +13,16 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { css } from '@emotion/css';
-import { type ChangeEvent, type FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  type ChangeEvent,
+  type FC,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { PageContainer } from '@/components/page-container';
 import { PageHeader } from '@/components/page-header';
 import { TaskInput } from '@/containers/task-input';
@@ -45,6 +54,8 @@ export const TasksPage: FC = memo(() => {
   const reorderTasks = useTasks(state => state.reorderTasks);
   const [isInitLoad, setIsInitLoad] = useState(true);
   const [searchPhrase, setSearchPhrase] = useState('');
+  const latestTasksRef = useRef(tasks);
+  const isInitLoadRef = useRef(isInitLoad);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -159,6 +170,11 @@ export const TasksPage: FC = memo(() => {
   }, []);
 
   useEffect(() => {
+    latestTasksRef.current = tasks;
+    isInitLoadRef.current = isInitLoad;
+  }, [tasks, isInitLoad]);
+
+  useEffect(() => {
     if (!isInitLoad) return;
 
     taskService.loadTasks().then(loadedTasks => {
@@ -176,6 +192,14 @@ export const TasksPage: FC = memo(() => {
 
     return () => clearTimeout(timeoutId);
   }, [tasks, taskService, isInitLoad]);
+
+  useEffect(() => {
+    return () => {
+      if (!isInitLoadRef.current) {
+        void taskService.saveTasks(latestTasksRef.current);
+      }
+    };
+  }, [taskService]);
 
   const { pendingCount, completedCount } = useMemo(() => {
     let pending = 0;

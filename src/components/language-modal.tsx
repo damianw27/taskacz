@@ -2,6 +2,7 @@ import { css } from '@emotion/css';
 import i18n from 'i18next';
 import { type FC, memo, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/button';
+import { Modal } from '@/components/modal';
 import { Languages } from '@/i18n/consts/languages';
 import { useApi } from '@/modules/api/hooks/use-api';
 import { useTheme } from '@/modules/theme/hooks/use-theme';
@@ -34,48 +35,6 @@ export const LanguageModal: FC = memo(() => {
     setIsVisible(false);
   };
 
-  const backdropClassName = css`
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    box-sizing: border-box;
-  `;
-
-  const modalClassName = useMemo(
-    () => css`
-      background: ${colors.neutral[100]};
-      border: 3px solid ${colors.accent.main};
-      border-radius: 8px;
-      padding: 24px;
-      width: 100%;
-      max-width: 520px;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-
-      box-sizing: border-box;
-    `,
-    [colors],
-  );
-
-  const titleClassName = useMemo(
-    () => css`
-      font-size: 14px;
-      font-weight: 700;
-      color: ${colors.neutral[800]};
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-align: center;
-      margin-bottom: 4px;
-    `,
-    [colors],
-  );
-
   const subtitleClassName = useMemo(
     () => css`
       font-size: 11px;
@@ -83,15 +42,6 @@ export const LanguageModal: FC = memo(() => {
       text-align: center;
       letter-spacing: 1px;
       margin-bottom: 20px;
-    `,
-    [colors],
-  );
-
-  const dividerClassName = useMemo(
-    () => css`
-      border: none;
-      border-top: 2px solid ${colors.neutral[300]};
-      margin-bottom: 16px;
     `,
     [colors],
   );
@@ -168,41 +118,35 @@ export const LanguageModal: FC = memo(() => {
     [colors],
   );
 
-  const confirmClassName = css`
-    width: 100%;
-  `;
-
-  if (!isVisible) return null;
-
   return (
-    <div className={backdropClassName}>
-      <div className={modalClassName}>
-        <p className={titleClassName}>Choose your language</p>
-        <p className={subtitleClassName}>Select a language to continue</p>
-        <hr className={dividerClassName} />
-        <div className={gridClassName}>
-          {Languages.map(lang => {
-            const isSelected = selected === lang.code;
-            return (
-              <button
-                key={lang.code}
-                type="button"
-                className={getOptionClassName(isSelected)}
-                onClick={() => setSelected(lang.code)}
-              >
-                <span className={nativeNameClassName(isSelected)}>{lang.nativeName}</span>
-                <span className={englishNameClassName(isSelected)}>{lang.englishName}</span>
-              </button>
-            );
-          })}
-        </div>
-        <div className={confirmClassName}>
-          <Button style={{ width: '100%' }} onClick={handleConfirm}>
-            Confirm
-          </Button>
-        </div>
+    <Modal
+      isOpen={isVisible}
+      onClose={() => {}}
+      title="Choose your language"
+      maxWidth={520}
+      disableBackdropClose
+    >
+      <p className={subtitleClassName}>Select a language to continue</p>
+      <div className={gridClassName}>
+        {Languages.map(lang => {
+          const isSelected = selected === lang.code;
+          return (
+            <button
+              key={lang.code}
+              type="button"
+              className={getOptionClassName(isSelected)}
+              onClick={() => setSelected(lang.code)}
+            >
+              <span className={nativeNameClassName(isSelected)}>{lang.nativeName}</span>
+              <span className={englishNameClassName(isSelected)}>{lang.englishName}</span>
+            </button>
+          );
+        })}
       </div>
-    </div>
+      <Button style={{ width: '100%' }} onClick={handleConfirm}>
+        Confirm
+      </Button>
+    </Modal>
   );
 });
 

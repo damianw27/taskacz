@@ -6,6 +6,10 @@ import { Spinner } from '@/components/spinner';
 
 const TasksPage = lazy(() => import('@/pages/tasks-page').then(m => ({ default: m.TasksPage })));
 
+const ProjectsPage = lazy(() =>
+  import('@/pages/projects-page').then(m => ({ default: m.ProjectsPage })),
+);
+
 const SettingsPage = lazy(() =>
   import('@/pages/settings-page').then(m => ({ default: m.SettingsPage })),
 );
@@ -33,6 +37,14 @@ export const AppRoutes: FC = () => (
         element={
           <Suspense fallback={<RouteLoader />}>
             <TasksPage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="projects"
+        element={
+          <Suspense fallback={<RouteLoader />}>
+            <ProjectsPage />
           </Suspense>
         }
       />

@@ -11,6 +11,7 @@ export const no: Namespace = {
   },
   navigation: {
     tasks: 'Oppgaver',
+    projects: 'Projects',
     settings: 'Innstillinger',
   },
   settings: {
@@ -89,6 +90,15 @@ export const no: Namespace = {
     title: 'Mine oppgaver',
     addNewTask: 'Legg til ny oppgave',
     searchPlaceholder: 'Søk...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'Trinn {{current}} av {{total}}',

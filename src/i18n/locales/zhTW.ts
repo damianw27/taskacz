@@ -11,6 +11,7 @@ export const zhTW: Namespace = {
   },
   navigation: {
     tasks: '任務',
+    projects: 'Projects',
     settings: '設定',
   },
   settings: {
@@ -88,6 +89,15 @@ export const zhTW: Namespace = {
     title: '我的任務',
     addNewTask: '新增任務',
     searchPlaceholder: '搜尋...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: '第 {{current}} 步，共 {{total}} 步',

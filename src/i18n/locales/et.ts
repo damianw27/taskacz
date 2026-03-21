@@ -11,6 +11,7 @@ export const et: Namespace = {
   },
   navigation: {
     tasks: 'Ülesanded',
+    projects: 'Projects',
     settings: 'Seaded',
   },
   settings: {
@@ -87,6 +88,15 @@ export const et: Namespace = {
     title: 'Minu ülesanded',
     addNewTask: 'Lisa uus ülesanne',
     searchPlaceholder: 'Otsi...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'Samm {{current}} / {{total}}',

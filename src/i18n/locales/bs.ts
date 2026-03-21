@@ -11,6 +11,7 @@ export const bs: Namespace = {
   },
   navigation: {
     tasks: 'Zadaci',
+    projects: 'Projects',
     settings: 'Postavke',
   },
   settings: {
@@ -89,6 +90,15 @@ export const bs: Namespace = {
     title: 'Moji zadaci',
     addNewTask: 'Dodaj novi zadatak',
     searchPlaceholder: 'Traži...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'Korak {{current}} od {{total}}',

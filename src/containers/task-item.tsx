@@ -12,12 +12,15 @@ import {
   useState,
 } from 'react';
 import { IconButton } from '@/components/icon-button';
+import { ProjectPickerModal } from '@/components/project-picker-modal';
 import { TextBox } from '@/components/text-box';
 import { CheckCircleIcon } from '@/icons/check-circle-icon';
 import { EmptyCircleIcon } from '@/icons/empty-circle-icon';
+import { FolderIcon } from '@/icons/folder-icon';
 import { GripIcon } from '@/icons/grip-icon';
 import { TrashIcon } from '@/icons/trash-icon';
 import { useTheme } from '@/modules/theme/hooks/use-theme';
+import { useProjects } from '@/states/projects';
 import { useTasks } from '@/states/tasks';
 import type { Task } from '@/types/task';
 
@@ -29,7 +32,14 @@ export const TaskItem: FC<Props> = memo(({ task }) => {
   const { colors } = useTheme();
   const updateTask = useTasks(state => state.updateTask);
   const removeTask = useTasks(state => state.removeTask);
+  const projects = useProjects(state => state.projects);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isProjectPickerOpen, setIsProjectPickerOpen] = useState(false);
+
+  const assignedProject = useMemo(
+    () => projects.find(p => p.id === task.projectId),
+    [projects, task.projectId],
+  );
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: task.id,
@@ -43,6 +53,18 @@ export const TaskItem: FC<Props> = memo(({ task }) => {
     [transform, transition],
   );
 
+  const projectColor = useMemo(() => assignedProject?.color, [assignedProject]);
+
+  const borderLeftColor = useMemo(
+    () => projectColor ?? (task.isDone ? colors.neutral[400] : colors.accent.main),
+    [projectColor, task.isDone, colors],
+  );
+
+  const borderLeftHoverColor = useMemo(
+    () => projectColor ?? (task.isDone ? colors.neutral[500] : colors.accent.dark),
+    [projectColor, task.isDone, colors],
+  );
+
   const taskItemClassName = useMemo(
     () => css`
       padding: 6px 10px;
@@ -52,15 +74,16 @@ export const TaskItem: FC<Props> = memo(({ task }) => {
       align-items: center;
       gap: 8px;
       border: 2px solid ${task.isDone ? colors.neutral[400] : colors.accent.main};
+      border-left: 4px solid ${borderLeftColor};
       border-radius: 4px;
       transition: border-color 0.15s ease, opacity 0.15s ease;
 
-
       &:hover {
         border-color: ${task.isDone ? colors.neutral[500] : colors.accent.dark};
+        border-left-color: ${borderLeftHoverColor};
       }
     `,
-    [task.isDone, colors],
+    [task.isDone, colors, borderLeftColor, borderLeftHoverColor],
   );
 
   const draggingClassName = useMemo(
@@ -119,9 +142,26 @@ export const TaskItem: FC<Props> = memo(({ task }) => {
       line-height: 1.4;
       word-break: break-word;
       opacity: ${task.isDone ? '0.6' : '1'};
-
     `,
     [task.isDone],
+  );
+
+  const folderButtonClassName = useMemo(
+    () => css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: ${assignedProject ? assignedProject.color : colors.neutral[400]};
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: ${assignedProject ? assignedProject.color : colors.neutral[600]};
+        opacity: 0.8;
+      }
+    `,
+    [colors, assignedProject],
   );
 
   const toggleDone = useCallback(() => {
@@ -154,39 +194,66 @@ export const TaskItem: FC<Props> = memo(({ task }) => {
     setIsEditMode(true);
   }, []);
 
+  const openProjectPicker = useCallback(() => {
+    setIsProjectPickerOpen(true);
+  }, []);
+
+  const closeProjectPicker = useCallback(() => {
+    setIsProjectPickerOpen(false);
+  }, []);
+
+  const assignProject = useCallback(
+    (projectId: number | undefined) => {
+      updateTask({ ...task, projectId });
+      setIsProjectPickerOpen(false);
+    },
+    [updateTask, task],
+  );
+
   return (
-    <li
-      ref={setNodeRef}
-      style={style}
-      className={cx(taskItemClassName, { [draggingClassName]: isDragging })}
-      {...attributes}
-    >
-      <div className={dragHandleClassName} {...listeners}>
-        <GripIcon width="14px" height="14px" />
-      </div>
-      <div className={checkIndicatorClassName} onClick={toggleDone}>
-        {task.isDone ? (
-          <CheckCircleIcon width="16px" height="16px" />
-        ) : (
-          <EmptyCircleIcon width="16px" height="16px" />
-        )}
-      </div>
-      <div className={labelClassName}>
-        {isEditMode ? (
-          <TextBox
-            defaultValue={task.label}
-            onKeyDown={handleLabelKeyDown}
-            onBlur={handleLabelBlur}
-            autoFocus
-          />
-        ) : (
-          <span onDoubleClick={enterEditMode}>{task.label}</span>
-        )}
-      </div>
-      <IconButton onClick={handleRemove} variant="danger">
-        <TrashIcon width="14px" height="14px" />
-      </IconButton>
-    </li>
+    <>
+      <li
+        ref={setNodeRef}
+        style={style}
+        className={cx(taskItemClassName, { [draggingClassName]: isDragging })}
+        {...attributes}
+      >
+        <div className={dragHandleClassName} {...listeners}>
+          <GripIcon width="14px" height="14px" />
+        </div>
+        <div className={checkIndicatorClassName} onClick={toggleDone}>
+          {task.isDone ? (
+            <CheckCircleIcon width="16px" height="16px" />
+          ) : (
+            <EmptyCircleIcon width="16px" height="16px" />
+          )}
+        </div>
+        <div className={labelClassName}>
+          {isEditMode ? (
+            <TextBox
+              defaultValue={task.label}
+              onKeyDown={handleLabelKeyDown}
+              onBlur={handleLabelBlur}
+              autoFocus
+            />
+          ) : (
+            <span onDoubleClick={enterEditMode}>{task.label}</span>
+          )}
+        </div>
+        <div className={folderButtonClassName} onClick={openProjectPicker}>
+          <FolderIcon width="14px" height="14px" />
+        </div>
+        <IconButton onClick={handleRemove} variant="danger">
+          <TrashIcon width="14px" height="14px" />
+        </IconButton>
+      </li>
+      <ProjectPickerModal
+        isOpen={isProjectPickerOpen}
+        currentProjectId={task.projectId}
+        onSelect={assignProject}
+        onClose={closeProjectPicker}
+      />
+    </>
   );
 });
 

@@ -3,11 +3,13 @@ import { createRoot } from 'react-dom/client';
 import { App } from '@/app';
 import { initI18n } from '@/i18n/setup-i18n';
 import { capacitorAppSettingsService } from '@/platforms/mobile/services/app-settings-service';
+import { capacitorProjectService } from '@/platforms/mobile/services/project-service';
 import { capacitorTaskService } from '@/platforms/mobile/services/task-service';
 import { setApi } from '@/states/api';
 
 setApi({
   taskService: capacitorTaskService,
+  projectService: capacitorProjectService,
   appSettingsService: capacitorAppSettingsService,
 });
 

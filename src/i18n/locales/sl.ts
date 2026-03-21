@@ -11,6 +11,7 @@ export const sl: Namespace = {
   },
   navigation: {
     tasks: 'Naloge',
+    projects: 'Projects',
     settings: 'Nastavitve',
   },
   settings: {
@@ -89,6 +90,15 @@ export const sl: Namespace = {
     title: 'Moje naloge',
     addNewTask: 'Dodaj novo nalogo',
     searchPlaceholder: 'Iskanje...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: 'Korak {{current}} od {{total}}',

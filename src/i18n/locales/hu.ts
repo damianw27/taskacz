@@ -11,6 +11,7 @@ export const hu: Namespace = {
   },
   navigation: {
     tasks: 'Feladatok',
+    projects: 'Projects',
     settings: 'Beállítások',
   },
   settings: {
@@ -87,6 +88,15 @@ export const hu: Namespace = {
     title: 'Saját feladataim',
     addNewTask: 'Új feladat hozzáadása',
     searchPlaceholder: 'Keresés...',
+  },
+  projects: {
+    title: 'Projects',
+    addNewProject: 'Add new project',
+    colorLabel: 'Color',
+    emptyState: 'No projects yet. Create one below.',
+    noProject: 'No Project',
+    searchPlaceholder: 'Search projects...',
+    assignProject: 'Assign Project',
   },
   guide: {
     stepCounter: '{{current}}. lépés / {{total}}',

@@ -9,6 +9,7 @@ export interface Namespace {
   };
   readonly navigation: {
     readonly tasks: string;
+    readonly projects: string;
     readonly settings: string;
   };
   readonly settings: {
@@ -85,6 +86,15 @@ export interface Namespace {
     readonly title: string;
     readonly addNewTask: string;
     readonly searchPlaceholder: string;
+  };
+  readonly projects: {
+    readonly title: string;
+    readonly addNewProject: string;
+    readonly colorLabel: string;
+    readonly emptyState: string;
+    readonly noProject: string;
+    readonly searchPlaceholder: string;
+    readonly assignProject: string;
   };
   readonly guide: {
     readonly stepCounter: string;

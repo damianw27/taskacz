@@ -1,12 +1,15 @@
 import { css } from '@emotion/css';
-import { type FC, memo, useMemo } from 'react';
+import { type FC, memo, useEffect, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 import { TabButton } from '@/components/tab-button';
 import { TabButtonGroup } from '@/components/tab-button-group';
 import { useLocale } from '@/i18n/hooks/locale';
+import { FolderIcon } from '@/icons/folder-icon';
 import { ListCheckIcon } from '@/icons/list-check-icon';
 import { SettingsIcon } from '@/icons/settings-icon';
+import { useApi } from '@/modules/api/hooks/use-api';
 import { useTheme } from '@/modules/theme/hooks/use-theme';
+import { useProjects } from '@/states/projects';
 
 const tabContentClassName = css`
   position: relative;
@@ -20,6 +23,14 @@ const tabContentClassName = css`
 export const AppLayout: FC = memo(() => {
   const { t } = useLocale();
   const { colors } = useTheme();
+  const { projectService } = useApi();
+  const isLoaded = useProjects(state => state.isLoaded);
+  const setProjects = useProjects(state => state.setProjects);
+
+  useEffect(() => {
+    if (isLoaded) return;
+    projectService.loadProjects().then(setProjects);
+  }, [isLoaded, projectService, setProjects]);
 
   const layoutClassName = useMemo(
     () => css`
@@ -48,6 +59,11 @@ export const AppLayout: FC = memo(() => {
           to="/"
           label={t('navigation.tasks')}
           icon={<ListCheckIcon width="30px" height="30px" />}
+        />
+        <TabButton
+          to="/projects"
+          label={t('navigation.projects')}
+          icon={<FolderIcon width="30px" height="30px" />}
         />
       </TabButtonGroup>
       <main className={tabContentClassName}>
